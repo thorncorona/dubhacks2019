@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect(
-    "mongodb://dubhacks2019:kRELOvNfcpUBOT9XSDT7INB97ujHYLdlZSZHodJfpBvpw9u2QlxkvXm54a64VtYQleAM3nOzpSVgr0nqQyP15w%3D%3D@dubhacks2019.documents.azure.com:10255/?ssl=true");
+mongoose.connect("mongodb+srv://dubhacks2019:wowsuchfun@cluster0-dbila.azure.mongodb.net/app?retryWrites=true&w=majority");
 
 const HOSTED_DOMAIN = "http://localhost:3000";
 
