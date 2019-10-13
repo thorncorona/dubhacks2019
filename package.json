@@ -7,12 +7,20 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "azure-cognitiveservices-computervision": "^4.0.0",
+    "azure-cognitiveservices-vision": "^2.0.0",
     "body-parser": "^1.18.3",
+    "botbuilder": "^4.6.0-preview1",
+    "botbuilder-ai": "^4.6.0-preview1",
+    "dotenv": "^8.1.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "lowdb": "^1.0.0",
     "mongoose": "^5.7.4",
+    "ms-rest-azure": "^3.0.0",
     "nanoid": "^2.0.1",
+    "request-promise": "^4.2.4",
+    "restify": "^8.4.0",
     "valid-url": "^1.0.9"
   }
 }

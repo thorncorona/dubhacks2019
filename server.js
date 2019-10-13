@@ -1,12 +1,17 @@
+require('dotenv').config();
+
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 
+const ImageRecog = require('./imgrecog.js');
+const IntentRecog = require('./intentrecog.js');
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect("mongodb+srv://dubhacks2019:wowsuchfun@cluster0-dbila.azure.mongodb.net/app?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGO_DB_URL);
 
-const HOSTED_DOMAIN = "http://localhost:3000";
+const HOSTED_DOMAIN = "http://0.0.0.0:3000";
 
 const Location = mongoose.model('Location', new Schema({location: String, date: Date}));
 const Speech = mongoose.model('Speech', new Schema({speech: String, date: Date}));
@@ -31,15 +36,15 @@ app.get('/', (req, res) => {
 });
 
 // question
-app.post('/question', urlencodedParser, (req, res) => {
+app.post('/question', urlencodedParser, async (req, res) => {
     let {question} = req.body;
-    res.send('no response for ' + question);
+    res.send(await IntentRecog.recognizeIntent(question));
 });
 
 app.post('/location', jsonParser, (req, res) => {
     let { location, date } = req.body;
-    let lModel = new Location({ location, date });
-    lModel.save();
+    let model = new Location({ location, date });
+    model.save();
     console.log(location,date);
     res.send('ok');
 });
@@ -54,7 +59,13 @@ app.post('/speech', jsonParser, (req, res) => {
 
 app.post('/image', jsonParser, (req, res) => {
     let { image, date } = req.body;
-    let model = new Image({ image, date });
+    let tags = ImageRecog.tagImage(image);
+    let tagFinal = [];
+    for(let tag in tags) {
+        tagFinal.push(tags['name']);
+    }
+
+    let model = new Image({ image, date, objects: tagFinal });
     model.save();
     console.log(image,date);
     res.send('ok');
