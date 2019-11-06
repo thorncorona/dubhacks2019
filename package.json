@@ -16,7 +16,7 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "lowdb": "^1.0.0",
-    "mongoose": "^5.7.4",
+    "mongoose": "^5.7.5",
     "ms-rest-azure": "^3.0.0",
     "nanoid": "^2.0.1",
     "request-promise": "^4.2.4",
